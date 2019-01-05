@@ -12,10 +12,15 @@ export default function questions(state = {}, action) {
         ...action.questions,
       };
     case ADD_QUESTION:
+    console.log("action in add question",action);
+    console.log("state in add question",state);
       return {
         ...state,
-        [action.question.id]: action.question,
+        [action.question.formattedQuestion.id]: action.question.formattedQuestion,
+
+
       };
+
     case REGISTER_VOTE:
       return {
         ...state,

@@ -9,7 +9,20 @@ export default function users(state = {}, action) {
         ...state,
         ...action.users,
       };
+    case 'ADD_QUESTION_TO_USER':
+      const user = action.question.formattedQuestion.author;
+      const questionId = action.question.formattedQuestion.id;
+      console.log({user,questionId});
+      return {
+        ...state,
+        [user]: {
+          ...state[user],
+          questions: state[user].questions.concat(questionId)
+        }
+      };
     case REGISTER_VOTE:
+    console.log("Most imp part ", state);
+
       return {
         ...state,
         [action.authedUser]: {

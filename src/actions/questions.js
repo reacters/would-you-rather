@@ -16,6 +16,12 @@ function addQuestion(question) {
     question,
   };
 }
+function addQuestionToUser(question){
+  return {
+    type: 'ADD_QUESTION_TO_USER',
+    question
+  }
+}
 
 export function handleAddQuestion(optionOneText, optionTwoText) {
   return (dispatch, getState) => {
@@ -28,7 +34,13 @@ export function handleAddQuestion(optionOneText, optionTwoText) {
       optionOneText,
       optionTwoText,
     })
-      .then(question => dispatch(addQuestion(question)))
+      .then(res => {
+        console.log("question data is", res);
+        return dispatch(addQuestion(res));
+      })
+      .then(res => {
+        return dispatch(addQuestionToUser(res.question))
+      })
       .then(() => dispatch(hideLoading()));
   };
 }
